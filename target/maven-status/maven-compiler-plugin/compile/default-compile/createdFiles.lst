@@ -5,4 +5,5 @@ com\example\employeeaccess\AccessLevel.class
 com\example\employeeaccess\EligibilityResult.class
 com\example\employeeaccess\EmploymentStatus.class
 com\example\employeeaccess\EmploymentType.class
+com\example\employeeaccess\Main.class
 com\example\employeeaccess\EligibilityService.class

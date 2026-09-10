@@ -1,60 +1,30 @@
 pipeline {
+
     agent any
 
-    options {
-        timestamps()
-        disableConcurrentBuilds()
+    tools {
+        maven 'M3'
     }
 
     stages {
-        stage('Checkout') {
+
+        stage('Checkout Git') {
             steps {
-                checkout scm
+                git branch: 'main',
+                    url: 'https://github.com/Sanjeevsekar23/assessment6.git'
             }
         }
 
-        stage('Compile') {
+        stage('Build and Test') {
             steps {
-                sh 'mvn -B clean compile'
+                bat 'mvn clean test'
             }
         }
 
-        stage('Test') {
+        stage('Test Results') {
             steps {
-                sh 'mvn -B test'
+                junit 'target/surefire-reports/*.xml'
             }
-        }
-
-        stage('Package') {
-            steps {
-                sh 'mvn -B package -DskipTests'
-            }
-        }
-    }
-
-    post {
-        always {
-            junit(
-                testResults: 'target/surefire-reports/*.xml',
-                allowEmptyResults: false
-            )
-
-            archiveArtifacts(
-                artifacts: 'target/*.jar',
-                fingerprint: true
-            )
-        }
-
-        success {
-            echo 'Employee Access Eligibility System build completed successfully.'
-        }
-
-        failure {
-            echo 'Build or test execution failed.'
-        }
-
-        cleanup {
-            cleanWs()
         }
     }
 }
