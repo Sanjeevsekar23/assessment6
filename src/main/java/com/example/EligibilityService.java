@@ -6,7 +6,7 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
-public final class EmployeeAccessService {
+public final class EligibilityService {
 
     private static final int MINIMUM_AGE = 21;
 
@@ -29,11 +29,12 @@ public final class EmployeeAccessService {
                     "Employee must be at least 21 years old");
         }
 
-        String department = employee.getDepartment()
-                .toUpperCase(Locale.ROOT);
+        String department =
+                employee.getDepartment().toUpperCase(Locale.ROOT);
 
         if (!AUTHORIZED_DEPARTMENTS.contains(department)) {
-            rejectionReasons.add("Department is not authorized");
+            rejectionReasons.add(
+                    "Department is not authorized");
         }
 
         if (employee.getEmploymentStatus()
@@ -43,13 +44,10 @@ public final class EmployeeAccessService {
         }
 
         if (!employee.isIdValid()) {
-            rejectionReasons.add("Employee ID is invalid");
+            rejectionReasons.add(
+                    "Employee ID is invalid");
         }
 
-        /*
-         * Mandatory failures take priority.
-         * All applicable reasons are returned together.
-         */
         if (!rejectionReasons.isEmpty()) {
             return new EligibilityResult(
                     employee,
@@ -58,10 +56,6 @@ public final class EmployeeAccessService {
                     rejectionReasons);
         }
 
-        /*
-         * The employee passes mandatory checks but does not have
-         * enough clearance for the requested resource.
-         */
         if (!employee.getSecurityClearance()
                 .meets(requestedAccessLevel)) {
 

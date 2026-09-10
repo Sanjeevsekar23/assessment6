@@ -1,0 +1,8 @@
+com\example\employeeaccess\EligibilityStatus.class
+com\example\employeeaccess\Employee.class
+com\example\employeeaccess\SecurityClearance.class
+com\example\employeeaccess\AccessLevel.class
+com\example\employeeaccess\EligibilityResult.class
+com\example\employeeaccess\EmploymentStatus.class
+com\example\employeeaccess\EmploymentType.class
+com\example\employeeaccess\EligibilityService.class
